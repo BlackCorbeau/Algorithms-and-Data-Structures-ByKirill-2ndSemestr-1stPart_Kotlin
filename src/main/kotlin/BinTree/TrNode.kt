@@ -17,4 +17,17 @@ class TrNode<T>() {
         get() = _right;
         set(right) { _right = right };
 
+    constructor(v: T?, l: TrNode<T>?, r: TrNode<T>?) : this() {
+        _value = v;
+        _right = r;
+        _left = l;
+    }
+
+    constructor(node: TrNode<T>?): this() {
+        if (node != null) {
+            _value = node.value;
+            _left = node.left;
+            _right = node.right;
+        }
+    }
 }
