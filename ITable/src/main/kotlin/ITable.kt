@@ -1,8 +1,8 @@
 package org.exampl
 
 abstract class ITable<T>() {
-    public fun insert(Tval : T) {};
-    public fun insert(Tkey: T, Tval: T) {};
-    public fun eraise(Tkey: T) {};
-    public fun find(Tkey: T) {};
+    public open fun insert(Tval : T): T {return Tval};
+    public open fun insert(Tkey: T, Tval: T): T {return Tval};
+    public open fun eraise(Tkey: T): T {return Tkey};
+    public open fun find(Tkey: T): T {return Tkey};
 }
