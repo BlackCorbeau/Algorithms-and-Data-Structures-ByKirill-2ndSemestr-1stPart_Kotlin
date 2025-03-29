@@ -15,4 +15,16 @@ class BinTree<U: Comparable<U>>(){
         root = tr.root;
     }
 
+    private fun _insert(root: TrNode<U>?, _val: U): TrNode<U> {
+        if (root == null) {
+            return TrNode<U>(_val);
+        }
+        when{
+            _val > root.value!! -> root.right = _insert(root.right, _val)
+            _val < root.value!! -> root.left = _insert(root.left, _val)
+        }
+        return root;
+    }
+
+    public fun insert(value: U) { root = _insert(_root, value) }
 }
