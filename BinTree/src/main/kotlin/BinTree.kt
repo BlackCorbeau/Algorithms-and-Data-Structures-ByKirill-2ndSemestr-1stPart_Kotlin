@@ -40,4 +40,42 @@ class BinTree<U: Comparable<U>>(){
     public fun find(value: U): TrNode<U>? {
          return _find(root, value);
     }
+
+    private fun _erase(root: TrNode<U>?, value: U): TrNode<U>? {
+        root ?: return null
+
+        when {
+            value < root.value!! -> {
+                root.left = _erase(root.left, value)
+            }
+            value > root.value!! -> {
+                root.right = _erase(root.right, value)
+            }
+            else -> { // Нашли узел для удаления
+                // Случай 1: Узел без детей или с одним ребенком
+                if (root.left == null) return root.right
+                if (root.right == null) return root.left
+
+                // Случай 3: Узел с двумя детьми
+                // Находим минимальное значение в правом поддереве (преемника)
+                root.value = minValue(root.right!!)
+                // Удаляем преемника
+                root.right = _erase(root.right, root.value!!)
+            }
+        }
+        return root
+    }
+
+    // Вспомогательная функция для нахождения минимального значения в поддереве
+    private fun minValue(node: TrNode<U>): U {
+        var current = node
+        while (current.left != null) {
+            current = current.left!!
+        }
+        return current.value!!
+    }
+
+    public fun erase(value: U) {
+        root = _erase(_root, value)
+    }
 }
