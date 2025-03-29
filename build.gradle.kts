@@ -10,11 +10,23 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    implementation(project(":BinTree"))
+    testImplementation("org.testng:testng:7.8.0") // Проверьте актуальную версию на Maven Central
 }
 
-tasks.test {
-    useJUnitPlatform()
+// Новый способ настройки TestNG (рекомендуется для Gradle 8.10+)
+testing {
+    suites {
+        val test by getting(JvmTestSuite::class) {
+            // Указываем, что используем TestNG вместо JUnit
+            useTestNG()
+        }
+    }
+}
+
+// Старый способ (работает, но будет удален в Gradle 9.0)
+tasks.named<Test>("test") {
+    useTestNG() // Оставьте, если нужна совместимость со старыми версиями
 }
 kotlin {
     jvmToolchain(21)
