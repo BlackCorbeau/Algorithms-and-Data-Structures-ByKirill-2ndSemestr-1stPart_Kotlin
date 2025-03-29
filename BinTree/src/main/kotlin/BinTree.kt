@@ -27,4 +27,18 @@ class BinTree<U: Comparable<U>>(){
     }
 
     public fun insert(value: U) { root = _insert(_root, value) }
+
+    private fun _find(root: TrNode<U>?, _val: U): TrNode<U>? {
+        root ?: return null
+        return when {
+            _val == root.value -> root
+            _val > root.value!! -> _find(root.right, _val) // Без модификации дерева
+            else -> _find(root.left, _val)
+        }
+    }
+
+    public fun find(value: U): TrNode<U>? {
+        root = _find(root, value);
+        return root;
+    }
 }
