@@ -7,4 +7,12 @@ class BinTree<U: Comparable<U>>(){
         get() = _root;
         set(node) {_root = node; }
 
+    constructor(root: TrNode<U>?): this(){
+        this.root = root;
+    }
+
+    constructor(tr: BinTree<U>) : this(){
+        root = tr.root;
+    }
+
 }
