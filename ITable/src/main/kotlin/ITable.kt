@@ -1,4 +1,4 @@
-package org.exampl.ITable
+package org.exampl
 
 abstract class ITable<T>() {
     public fun insert(Tval : T) {};
